@@ -1,27 +1,51 @@
 import { Component } from 'react'
+import KanyeQuote from './KanyeQuote'
 
 class Kanye extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            quote: ''
+            quote: '',
+            favorites: []
         }
     }
-    fetchQuote = async () => {
+    fetchQuote = async event => {
         const response = await fetch('https://api.kanye.rest/')
         const json = await response.json()
         this.setState({
             quote: json.quote
         })
     }
-    addToFavorites = () => {
-
+    addToFavorites = event => {
+        this.setState({
+            quote: '',
+            favorites: [...this.state.favorites, this.state.quote]
+        })
+        this.fetchQuote()
     }
     async componentDidMount() {
-        console.log(this)
+        this.fetchQuote()
     }
+    removeQuote = idx => {
+        // handle the deletion of that quote from the favorites array
+        console.log("hello from kanye")
+        let favs = this.state.favorites
+        favs.splice(idx, 1)
+        this.setState({
+            favorites: favs
+        })
+    }
+
     render() {
         const kanyeQuote = this.state.quote
+        const favoriteQuotes = this.state.favorites.map((fav, idx) => {
+            return <KanyeQuote 
+                key={idx}
+                idx={idx}
+                removeQuote={this.removeQuote}
+                quote={fav}
+            />
+        })
         return <div>
             <h1>Quotes from Kanye</h1>
             <button onClick={this.fetchQuote}>Get New Quote</button>
@@ -30,7 +54,7 @@ class Kanye extends Component {
 
             <h2>Favorites:</h2>
             <ul>
-                
+                {favoriteQuotes}
             </ul>
         </div>
     }
