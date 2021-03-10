@@ -1,10 +1,12 @@
 import { Component } from 'react'
-import FavoriteFoods from './components/FavoriteFoods'
+// import FavoriteFoods from './components/FavoriteFoods'
+import Kanye from './components/Kanye'
 
 class App extends Component {
   render() {
     return <div>
-      <FavoriteFoods />
+      {/* <FavoriteFoods /> */}
+      <Kanye exampleProp = {"this is a prop"}/>
     </div>
   }
 }
