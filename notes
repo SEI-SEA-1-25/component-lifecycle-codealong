@@ -1,0 +1,22 @@
+React is all about components
+
+Components have:
+
+Props: Immutable data from the parent
+State: Mutable data within the components
+
++ 
+
+LIFECYCLE METHODS
+
+3 Phases:
+Mounting + Updating + Unmounting
+
+Mounting:
+constructor
+render
+componentDidMount
+
+Updating:
+render <- render() is called EVERY TIME state is updated
+componentDidUpdate
